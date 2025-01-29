@@ -1,0 +1,87 @@
+// Road 1
+const int red1 = 2, yellow1 = 3, green1 = 4;
+// Road 2
+const int red2 = 5, yellow2 = 6, green2 = 7;
+// Road 3
+const int red3 = 8, yellow3 = 9, green3 = 10;
+// Road 4
+const int red4 = 11, yellow4 = 12, green4 = 13;
+
+// Time durations for the lights
+const int redDuration = 5000;    // 3 sec
+const int yellowDuration = 2000; // 2 sec
+const int greenDuration = 5000;  // sec;
+
+// Function prototypes
+void groupA();
+void groupB();
+void allYellow();   
+
+void setup() {
+ 
+  for (int i = 2; i <= 13; i++) {
+    pinMode(i, OUTPUT);
+    digitalWrite(i, LOW);
+  }
+}
+
+void loop() {
+  groupA();      //  Road 1 & 2 green, Road 3 & 4 red
+  allYellow();   // All roads yellow
+  groupB();      //  Road 3 & 4 green, Road 1 & 2 red
+  allYellow();   // All roads yellow
+}
+
+void groupA() {
+  digitalWrite(green1, HIGH);
+  digitalWrite(red1, LOW);
+
+  digitalWrite(green2, HIGH);
+  digitalWrite(red2, LOW);
+
+  digitalWrite(red3, HIGH);
+  digitalWrite(green3, LOW);
+
+  digitalWrite(red4, HIGH);
+  digitalWrite(green4, LOW);
+
+  delay(greenDuration);
+}
+
+void groupB() {
+  digitalWrite(green3, HIGH);
+  digitalWrite(red3, LOW);
+
+  digitalWrite(green4, HIGH);
+  digitalWrite(red4, LOW);
+
+  digitalWrite(red1, HIGH);
+  digitalWrite(green1, LOW);
+
+  digitalWrite(red2, HIGH);
+  digitalWrite(green2, LOW);
+
+  delay(greenDuration);
+}
+
+void allYellow() {
+  // Turn all green lights off
+  digitalWrite(green1, LOW);
+  digitalWrite(green2, LOW);
+  digitalWrite(green3, LOW);
+  digitalWrite(green4, LOW);
+
+  // Turn all yellow lights on
+  digitalWrite(yellow1, HIGH);
+  digitalWrite(yellow2, HIGH);
+  digitalWrite(yellow3, HIGH);
+  digitalWrite(yellow4, HIGH);
+
+  delay(yellowDuration);
+
+  // Turn all yellow lights off
+  digitalWrite(yellow1, LOW);
+  digitalWrite(yellow2, LOW);
+  digitalWrite(yellow3, LOW);
+  digitalWrite(yellow4, LOW);
+}
